@@ -1,0 +1,24 @@
+# Decision log
+
+| Decision | Reason |
+|---|---|
+| Mirror book-to-course: three passes, JSON drafts rendered by script, same HTML assets copied (not referenced) | Requirement: a video course must look and feel like a codebase/book course. Copy keeps the skill working if siblings move. |
+| Lessons use whole-second timestamps as citations; `quote.at` instead of `page`; one video per module | Pages do not exist in video. Seconds are unambiguous, link directly (`youtu.be/ID?t=N`) and are checkable against the transcript. One video per module keeps a citation's meaning unambiguous. |
+| Segment = creator chapter, else TF-IDF topic shift + pause; chapters over 1800 words split the same way | Requirement: use the creator's chapters when present. TextTiling-style cosine on stdlib TF-IDF is deterministic and needs no model download (embeddings were rejected: not reproducible across machines, extra dependency). |
+| Segment ids are global (`s001…`) and stable for same input | Resumability across models and sessions. |
+| Transcript order: manual captions → auto captions → faster-whisper | Requirement. Manual > auto > ASR in accuracy; Whisper costs minutes of CPU and a download. `--whisper off|auto|force`. |
+| yt-dlp as external binary, json3 caption format | Installed, maintained, handles captions; json3 gives clean events (VTT rolling-duplicates are worse). `youtube-transcript-api` not added: yt-dlp covers the same endpoint, one dependency less. |
+| Whisper runs in a separate PEP-723 script (`whisper_worker.py`), greedy decoding, int8 | Heavy dependency isolated; greedy + temperature 0 so the same audio gives the same text on the same machine. Audio decoded by PyAV: no ffmpeg needed. Dependency pins (`av>=16,<17`, `faster-whisper>=1.2`, `tokenizers>=0.21`) were forced by measured failures: av 19 dropped `metadata_errors`, av 14 built from source against a broken Homebrew ffmpeg, old tokenizers had no wheel. |
+| Cleaning: strip tags/fillers, drop rolling overlaps by longest suffix/prefix word match, regroup to ≤ 28-word lines | Auto captions repeat the previous tail; the LLM must never pay tokens twice. Lines keep the first word's time. |
+| Sponsor removal: ≥ 3 promo keywords in 30 s, runs reported in `clean_report.json` | Cheap, offline. SponsorBlock API not used (network + third-party data). Heuristic; reported, reversible with `--keep-sponsors`. |
+| Digest = TextRank-lite over TF-IDF sentences, regex definitions/numbers/names, `check` words by `difflib` against title+description+chapter vocabulary | Requirement: cheap local digests. The `check` list targets auto-caption garbling using words the creator typed. Not an ASR fix; a hint. |
+| Pass-2 packs: complete when ≤ budget, else ranked sentences in time order with `[… omitted N words …]`, `needs_more` flag | Same design as book-to-course; the model decides whether to `read` more (logged), the script only flags it. |
+| Frames/OCR are opt-in (`--frames`); OCR text enters segments as `[on-screen]` lines; images never go to the LLM | Requirement: optional. Opt-in because it needs a media download, ffmpeg and CPU. OCR is the only visual signal that costs tokens in proportion to text, not pixels. |
+| Block types: text, cards, steps, quote, math, diagram, callout (no figure/code/task) | User decision. The video's frames are not republished; diagrams are drawn from specs. |
+| `math origin: video` warns unless `checked_against: screen` | Audio rarely carries symbols; the formula in the lesson is then the model's reconstruction. The warning keeps that visible. |
+| Quote check: ≥ 90% of words in order within [at−30 s, at+45 s] of the cleaned transcript | Caption timing is ±5 s and lines are re-grouped. Window is a trade between false errors and fake quotes (tested with a fabricated quote). |
+| Copy check uses word shingles without punctuation | Measured: with punctuation attached (`rug."` vs `rug.`) a 27-word copied passage went undetected. |
+| `Y2C_YTDLP_ARGS`, `--audio-file`, `--video-file` | Measured: all media downloads returned HTTP 403 here while captions worked. Cookies are the user's decision, never default. |
+| Token estimate ≈ 4 chars/token Latin, 2.5 Cyrillic (inherited) | Model-independent rough estimate; labelled estimate everywhere. |
+| Scene threshold 0.05 + always the first frame; filtering by OCR-text similarity | Measured on a synthetic slide video: threshold 0.3 found 0 changes for text-on-white slides. Low threshold gives more candidates, the OCR de-duplication and `--max-frames` bound the cost. |
+| `-fps_mode vfr` with a `-vsync` fallback; ffmpeg errors abort the stage | Measured: ffmpeg 9 removed `-vsync`, which silently produced zero frames. |

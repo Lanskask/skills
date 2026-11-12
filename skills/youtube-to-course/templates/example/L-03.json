@@ -1,0 +1,32 @@
+{
+  "id": "L-03", "title": "Four guidelines",
+  "metaphor": "Building an idea in someone's mind is like building a bridge from their bank of the river: you start where they stand, not where you do.",
+  "hook": "Once you accept that your job is to build an idea in the audience, four practical rules follow.",
+  "why_care": "You can use these four rules as a checklist when you review your own draft.",
+  "screens": [
+    {"id": "s1", "heading": "Limit your focus, then make them curious", "covers": [0, 1], "blocks": [
+      {"type": "steps", "items": [
+        {"title": "One idea only", "text": "Cut the content back to the single idea you care about most, so you can give context and examples."},
+        {"title": "Make it the through-line", "text": "Everything you say should link back to that one idea."},
+        {"title": "Stir curiosity", "text": "Ask intriguing questions that reveal a gap in the listener's [[worldview]] so they want it closed."}], "cite": [302, 309, 324, 346, 356]},
+      {"type": "quote", "text": "slash back your content so that you can focus on the single idea", "at": 309, "speaker": "Chris Anderson", "meaning": "A talk with five ideas leaves no room to explain any of them properly; pick one and give it room."}
+    ]},
+    {"id": "s2", "heading": "Use familiar concepts, make it worth sharing", "covers": [0], "blocks": [
+      {"type": "text", "text": "Build the idea from concepts your audience already knows, in their language, not yours. A [[metaphor]] shows the shape of the pattern: CRISPR was explained as a word processor for DNA. Then test the talk on trusted friends to find what confuses them.", "cite": [377, 385, 404, 428]},
+      {"type": "callout", "variant": "warning", "title": "The honesty test", "text": "Ask who the idea benefits and answer honestly. If it only serves you or your organisation, the speaker says it is probably not worth sharing.", "cite": [441, 449]},
+      {"type": "diagram", "kind": "flow", "title": "Checklist for a draft", "caption": "The four guidelines as a loop you can repeat while rewriting.", "cite": [302, 337, 377, 435], "direction": "LR",
+       "nodes": [{"id": "a", "label": "One idea"}, {"id": "b", "label": "Curiosity"}, {"id": "c", "label": "Familiar concepts"}, {"id": "d", "label": "Worth sharing?"}],
+       "edges": [{"from": "a", "to": "b"}, {"from": "b", "to": "c"}, {"from": "c", "to": "d"}, {"from": "d", "to": "a", "label": "revise"}]}
+    ]}
+  ],
+  "quiz": [
+    {"question": "Your draft explains a technical term with another technical term the audience has not met. Which guideline does this break, and what is the fix?", "options": ["Limit your focus: delete the term", "Use familiar concepts: explain it with something they already know, such as a metaphor", "Stir curiosity: add a joke", "Make it valuable: ask who it benefits"], "answer": 1, "explain_right": "The third guideline builds the idea from concepts already in the listeners' minds, and metaphors show the shape of the pattern.", "explain_wrong": "The other guidelines are about scope, curiosity and benefit, not about unfamiliar vocabulary.", "cite": [377, 404]}
+  ],
+  "glossary": [
+    {"term": "worldview", "definition": "The structure of linked ideas in a person's mind that they use to make sense of the world.", "cite": [356]},
+    {"term": "metaphor", "definition": "Explaining something new by comparing it to something the listener already understands.", "cite": [393, 404]},
+    {"term": "through-line", "definition": "The single idea that runs through a whole talk so that everything links back to it.", "cite": [324]}
+  ],
+  "key_takeaways": ["Limit the talk to one major idea and make it the through-line.", "Stir curiosity before you start building.", "Build from concepts the audience already knows and ask who the idea benefits."],
+  "sources": {"segments": ["s004", "s005", "s006", "s007"], "read_full": []}
+}

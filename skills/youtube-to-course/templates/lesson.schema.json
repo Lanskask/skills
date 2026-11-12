@@ -1,0 +1,307 @@
+{
+ "$comment": "Pass-3 output: work/drafts/L-xx.json. Block fields depend on block.type (x-by-type). Times are whole seconds in the lesson's video.",
+ "type": "object",
+ "required": [
+  "id",
+  "title",
+  "metaphor",
+  "hook",
+  "why_care",
+  "screens",
+  "quiz",
+  "glossary",
+  "key_takeaways",
+  "sources"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "pattern": "^L-[0-9]{2,3}$"
+  },
+  "title": {
+   "type": "string",
+   "minLength": 3
+  },
+  "metaphor": {
+   "type": "string",
+   "minLength": 10,
+   "maxLength": 300
+  },
+  "hook": {
+   "type": "string",
+   "minLength": 10,
+   "maxLength": 300
+  },
+  "why_care": {
+   "type": "string",
+   "minLength": 10,
+   "maxLength": 300
+  },
+  "screens": {
+   "type": "array",
+   "minItems": 2,
+   "maxItems": 6,
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "heading",
+     "covers",
+     "blocks"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "minLength": 1
+     },
+     "heading": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 100
+     },
+     "covers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+       "type": "integer",
+       "minimum": 0
+      }
+     },
+     "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+       "type": "object",
+       "required": [
+        "type"
+       ],
+       "x-by-type": {
+        "field": "type",
+        "schemas": {
+         "text": {
+          "required": [
+           "text",
+           "cite"
+          ],
+          "props": {
+           "text": "string",
+           "cite": "times"
+          }
+         },
+         "cards": {
+          "required": [
+           "items",
+           "cite"
+          ],
+          "props": {
+           "items": "titled-items",
+           "cite": "times"
+          }
+         },
+         "steps": {
+          "required": [
+           "items",
+           "cite"
+          ],
+          "props": {
+           "items": "titled-items",
+           "cite": "times"
+          }
+         },
+         "quote": {
+          "required": [
+           "text",
+           "at",
+           "meaning"
+          ],
+          "props": {
+           "text": "string",
+           "at": "time",
+           "meaning": "string",
+           "speaker": "string"
+          }
+         },
+         "diagram": {
+          "required": [
+           "kind",
+           "title",
+           "caption",
+           "cite"
+          ],
+          "props": {
+           "kind": "string",
+           "title": "string",
+           "caption": "string",
+           "cite": "times"
+          }
+         },
+         "math": {
+          "required": [
+           "latex",
+           "origin",
+           "symbols",
+           "cite"
+          ],
+          "props": {
+           "latex": "string",
+           "origin": "origin",
+           "symbols": "symbols",
+           "cite": "times",
+           "caption": "string",
+           "checked_against": "checked"
+          }
+         },
+         "callout": {
+          "required": [
+           "variant",
+           "title",
+           "text",
+           "cite"
+          ],
+          "props": {
+           "variant": "variant",
+           "title": "string",
+           "text": "string",
+           "cite": "times"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "quiz": {
+   "type": "array",
+   "minItems": 1,
+   "maxItems": 5,
+   "items": {
+    "type": "object",
+    "required": [
+     "question",
+     "options",
+     "answer",
+     "explain_right",
+     "explain_wrong",
+     "cite"
+    ],
+    "properties": {
+     "question": {
+      "type": "string",
+      "minLength": 10
+     },
+     "options": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+       "type": "string",
+       "minLength": 1
+      }
+     },
+     "answer": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "explain_right": {
+      "type": "string",
+      "minLength": 10
+     },
+     "explain_wrong": {
+      "type": "string",
+      "minLength": 10
+     },
+     "cite": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    }
+   }
+  },
+  "glossary": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "term",
+     "definition",
+     "cite"
+    ],
+    "properties": {
+     "term": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 60
+     },
+     "definition": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 400
+     },
+     "cite": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    }
+   }
+  },
+  "key_takeaways": {
+   "type": "array",
+   "minItems": 2,
+   "maxItems": 5,
+   "items": {
+    "type": "string",
+    "minLength": 10
+   }
+  },
+  "sources": {
+   "type": "object",
+   "required": [
+    "segments",
+    "read_full"
+   ],
+   "properties": {
+    "segments": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "type": "string"
+     }
+    },
+    "read_full": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "segment",
+       "range",
+       "reason"
+      ],
+      "properties": {
+       "segment": {
+        "type": "string"
+       },
+       "range": {
+        "type": "string"
+       },
+       "reason": {
+        "type": "string",
+        "minLength": 5
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

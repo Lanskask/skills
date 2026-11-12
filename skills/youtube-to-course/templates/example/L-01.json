@@ -1,0 +1,32 @@
+{
+  "id": "L-01", "title": "A talk is a gift of an idea",
+  "metaphor": "A talk works like a parcel handed across a table: what matters is that the other person ends up holding the same object you started with.",
+  "hook": "You have probably been told to open with a story or end with a call to action. Chris Anderson says that is not what makes talks great.",
+  "why_care": "You can stop copying tricks and judge every choice in your own talk by one question: does it help the idea arrive?",
+  "screens": [
+    {"id": "s1", "heading": "There is no formula", "covers": [0], "blocks": [
+      {"type": "text", "text": "Some people believe a great talk follows a recipe: a childhood story, a personal secret, an inspiring ending. The speaker, who has helped many hundreds of speakers prepare, says no, and warns that overusing such [[devices]] makes you sound clichéd or manipulative.", "cite": [12, 26]},
+      {"type": "quote", "text": "if you overuse those devices, you're just going to come across as clichéd or emotionally manipulative", "at": 26, "speaker": "Chris Anderson", "meaning": "Tricks that worked once become a pattern the audience recognises, and then they trust you less."},
+      {"type": "callout", "variant": "info", "title": "What they do share", "text": "Even though the speakers and topics all look different, they have one key ingredient in common. The next screen names it.", "cite": [53]}
+    ]},
+    {"id": "s2", "heading": "The one task: transfer an idea", "covers": [1], "blocks": [
+      {"type": "text", "text": "The ingredient is a task: transfer into your listeners' minds an extraordinary gift, which he calls an [[idea]].", "cite": [61, 73]},
+      {"type": "diagram", "kind": "flow", "title": "What happens during a talk", "caption": "The speaker's idea is rebuilt, piece by piece, in each listener.", "cite": [82, 98, 126], "direction": "LR",
+       "nodes": [{"id": "a", "label": "Idea in the speaker's mind"}, {"id": "b", "label": "Voice and face"}, {"id": "c", "label": "Same pattern in listeners"}],
+       "edges": [{"from": "a", "to": "b"}, {"from": "b", "to": "c"}]},
+      {"type": "cards", "items": [
+        {"title": "In the room", "text": "About 1,200 strangers listening to one speaker over 18 minutes.", "icon": "👥"},
+        {"title": "In the brain", "text": "A pattern of a few million linked [[neurons]] stands for one idea and is recreated in the listeners.", "icon": "🧠"}], "cite": [82, 118, 133]}
+    ]}
+  ],
+  "quiz": [
+    {"question": "A colleague wants to open her talk with a childhood story because 'great talks always do'. What does the speaker's advice suggest she should check first?", "options": ["Whether the story is long enough", "Whether the story helps her one idea arrive in the listeners' minds", "Whether other speakers at the event used a story", "Whether the story is a personal secret"], "answer": 1, "explain_right": "The video says the shared ingredient is transferring an idea; devices are only useful if they serve that.", "explain_wrong": "The other options treat the story as a formula. The video rejects formulas and warns that overused devices feel manipulative.", "cite": [21, 61]}
+  ],
+  "glossary": [
+    {"term": "devices", "definition": "Standard speaking tricks, such as a childhood story or an inspiring call to action, that people copy from other talks.", "cite": [12]},
+    {"term": "idea", "definition": "In this video, a pattern of information that helps you understand and navigate the world; it is what a speaker rebuilds in the listeners' minds.", "cite": [61, 147]},
+    {"term": "neurons", "definition": "Brain cells. The video says a few million linked neurons form the pattern that represents a single idea.", "cite": [114, 118]}
+  ],
+  "key_takeaways": ["There is no formula for a great talk, and overused tricks can backfire.", "The speaker's number one task is to transfer an idea into the listeners' minds."],
+  "sources": {"segments": ["s001", "s002"], "read_full": []}
+}

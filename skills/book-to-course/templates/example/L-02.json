@@ -1,0 +1,189 @@
+{
+  "id": "L-02",
+  "title": "Spiralling charges",
+  "metaphor": "A charge in a magnetic field is like a figure skater on a rope: pulled sideways at every moment, it circles while gliding forward.",
+  "hook": "Aurora curtains follow field lines because charged particles refuse to cross them freely.",
+  "why_care": "Your particle pusher must resolve this circling motion, or the simulated energy drifts away from physical values.",
+  "screens": [
+    {
+      "id": "s1",
+      "heading": "The helix",
+      "covers": [
+        0,
+        1
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "The Larmor radius is the radius of the circular part of that helix and grows with the particle speed.",
+          "page": 11,
+          "meaning": "Seen from above the particle draws a circle; along the field it slides forward. The [[Larmor radius]] is the size of that circle."
+        },
+        {
+          "type": "math",
+          "origin": "book",
+          "eq": "ch04-e01",
+          "cite": [
+            11
+          ],
+          "latex": "r_L = \\frac{m v_\\perp}{|q| B} \\approx \\frac{v_\\perp}{\\omega_c}",
+          "caption": "The circle gets wider with speed and tighter with a stronger field.",
+          "symbols": [
+            {
+              "sym": "r_L",
+              "meaning": "the [[Larmor radius]]"
+            },
+            {
+              "sym": "v_\\perp",
+              "meaning": "the speed across the field lines"
+            },
+            {
+              "sym": "m, q",
+              "meaning": "mass and charge of the particle"
+            },
+            {
+              "sym": "B",
+              "meaning": "the magnetic field strength"
+            },
+            {
+              "sym": "\\omega_c",
+              "meaning": "the [[gyrofrequency]]"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "How often the particle goes around is the [[gyrofrequency]]. It depends on the charge, the mass and the field strength, not on the speed, which is why a fast and a slow ion of the same kind finish each circle in the same time even though the fast one draws a wider one.",
+          "cite": [
+            11
+          ]
+        },
+        {
+          "type": "diagram",
+          "kind": "flow",
+          "title": "How a helix appears",
+          "cite": [
+            11
+          ],
+          "direction": "LR",
+          "caption": "Two independent motions add up: a circle across the field and a free slide along it.",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Magnetic force pushes sideways"
+            },
+            {
+              "id": "b",
+              "label": "Particle circles the field line"
+            },
+            {
+              "id": "c",
+              "label": "Nothing pushes along the field"
+            },
+            {
+              "id": "d",
+              "label": "Helix path"
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "b"
+            },
+            {
+              "from": "b",
+              "to": "d",
+              "label": "adds to"
+            },
+            {
+              "from": "c",
+              "to": "d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "heading": "Adding an electric field",
+      "covers": [
+        2
+      ],
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Apply an electric field across the magnetic field and the circles drift sideways. This is the [[E cross B drift]].",
+          "cite": [
+            11
+          ]
+        },
+        {
+          "type": "cards",
+          "items": [
+            {
+              "title": "Same for both",
+              "text": "Electrons and ions drift with the same velocity, so this drift alone carries no net current."
+            },
+            {
+              "title": "Field gradient",
+              "text": "A magnetic field that changes in space adds a slow sideways drift of its own."
+            }
+          ],
+          "cite": [
+            11,
+            12
+          ]
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "question": "You double the speed $v_\\perp$ of an ion in a uniform magnetic field. What happens to the radius $r_L$ of its circle?",
+      "options": [
+        "It doubles",
+        "It stays the same",
+        "It halves"
+      ],
+      "answer": 0,
+      "explain_right": "The Larmor radius grows with the particle speed, so $2 v_\\perp$ gives a circle with $r_L$ twice as large.",
+      "explain_wrong": "Recall which quantity grows with speed and which depends only on charge, mass and field.",
+      "cite": [
+        11
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Larmor radius",
+      "definition": "The radius of the circular part of a charged particle's spiral path in a magnetic field.",
+      "cite": [
+        11
+      ]
+    },
+    {
+      "term": "gyrofrequency",
+      "definition": "How many times per second a charged particle circles a magnetic field line.",
+      "cite": [
+        11
+      ]
+    },
+    {
+      "term": "E cross B drift",
+      "definition": "The sideways drift of charged particles when electric and magnetic fields cross at right angles.",
+      "cite": [
+        11
+      ]
+    }
+  ],
+  "key_takeaways": [
+    "In a magnetic field a charge moves along a helix whose circle size is the Larmor radius.",
+    "Adding a crossed electric field makes the circles drift at the E cross B velocity."
+  ],
+  "sources": {
+    "chapters": [
+      "ch04"
+    ],
+    "read_full": []
+  }
+}

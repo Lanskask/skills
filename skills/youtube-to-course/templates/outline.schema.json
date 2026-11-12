@@ -1,0 +1,157 @@
+{
+ "$comment": "Pass-1 output: work/outline.json. One module = one video (a playlist gives one module per video, or several modules per long video).",
+ "type": "object",
+ "required": [
+  "course",
+  "modules"
+ ],
+ "properties": {
+  "accent": {
+   "type": "string",
+   "enum": [
+    "vermillion",
+    "coral",
+    "teal",
+    "amber",
+    "forest"
+   ]
+  },
+  "modules": {
+   "type": "array",
+   "minItems": 1,
+   "maxItems": 10,
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "subtitle",
+     "lessons",
+     "video"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "pattern": "^M[0-9]{1,2}$"
+     },
+     "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 80
+     },
+     "subtitle": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 200
+     },
+     "lessons": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+       "type": "object",
+       "required": [
+        "id",
+        "title",
+        "objectives",
+        "source_refs"
+       ],
+       "properties": {
+        "id": {
+         "type": "string",
+         "pattern": "^L-[0-9]{2,3}$"
+        },
+        "title": {
+         "type": "string",
+         "minLength": 3,
+         "maxLength": 100
+        },
+        "objectives": {
+         "type": "array",
+         "minItems": 2,
+         "maxItems": 5,
+         "items": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 200
+         }
+        },
+        "source_refs": {
+         "type": "array",
+         "minItems": 1,
+         "items": {
+          "type": "object",
+          "required": [
+           "segment"
+          ],
+          "properties": {
+           "segment": {
+            "type": "string",
+            "pattern": "^s[0-9]{3,4}$"
+           },
+           "keywords": {
+            "type": "array",
+            "items": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "video": {
+      "type": "string",
+      "pattern": "^v[0-9]{2}$"
+     }
+    }
+   }
+  },
+  "skipped": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "segment",
+     "reason"
+    ],
+    "properties": {
+     "segment": {
+      "type": "string"
+     },
+     "reason": {
+      "type": "string",
+      "minLength": 5
+     }
+    }
+   }
+  },
+  "course": {
+   "type": "object",
+   "required": [
+    "title",
+    "lang"
+   ],
+   "properties": {
+    "title": {
+     "type": "string",
+     "minLength": 1
+    },
+    "lang": {
+     "type": "string",
+     "enum": [
+      "en",
+      "ru"
+     ]
+    },
+    "course_title": {
+     "type": "string"
+    },
+    "audience": {
+     "type": "string"
+    }
+   }
+  }
+ }
+}

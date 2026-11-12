@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "ES2019", "lib": ["ES2019", "DOM"], "checkJs": true, "allowJs": true,
+    "noEmit": true, "strict": true, "noImplicitAny": true, "skipLibCheck": true
+  },
+  "files": ["assets/book-ui.js", "assets/book-math.js"]
+}

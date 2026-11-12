@@ -1,0 +1,38 @@
+{
+  "book": {"title": "Plasma Simulation Primer", "lang": "en", "course_title": "Plasma Simulation Primer: the Course", "audience": "student who knows basic mechanics, new to plasma"},
+  "accent": "teal",
+  "modules": [
+    {
+      "id": "M1",
+      "title": "What a plasma is and how its particles move",
+      "subtitle": "From a gas that conducts electricity to the spiral paths of single charges.",
+      "lessons": [
+        {
+          "id": "L-01",
+          "title": "A gas that behaves as a crowd",
+          "objectives": [
+            "Explain why a plasma counts as a separate state of matter",
+            "Describe the Debye length as the screening distance of a charge",
+            "Recognise quasi-neutrality at scales larger than the Debye length"
+          ],
+          "source_refs": [{"chapter": "ch03", "pages": [4, 7], "keywords": ["plasma", "Debye length", "quasi-neutral"]}]
+        },
+        {
+          "id": "L-02",
+          "title": "Spiralling charges",
+          "objectives": [
+            "Explain how a charged particle moves in a uniform magnetic field",
+            "Define the Larmor radius and the gyrofrequency",
+            "Predict the E cross B drift when an electric field is added"
+          ],
+          "source_refs": [{"chapter": "ch04", "pages": [11, 14], "keywords": ["Larmor radius", "gyrofrequency", "drift"]}]
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {"chapter": "ch05", "reason": "example outline covers two chapters only"},
+    {"chapter": "ch06", "reason": "example outline covers two chapters only"},
+    {"chapter": "ch07", "reason": "example outline covers two chapters only"}
+  ]
+}

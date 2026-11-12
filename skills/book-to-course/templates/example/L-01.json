@@ -1,0 +1,204 @@
+{
+  "id": "L-01",
+  "title": "A gas that behaves as a crowd",
+  "metaphor": "A plasma is like a stadium crowd doing the wave: no single person decides it, yet the whole crowd moves together.",
+  "hook": "A neon sign, a lightning bolt and the Sun look nothing alike, yet the book files all three under one heading.",
+  "why_care": "Every plasma simulation starts by checking that the gas really is a plasma; the Debye length tells you how fine your grid must be.",
+  "screens": [
+    {
+      "id": "s1",
+      "heading": "Why a plasma is not just a hot gas",
+      "covers": [
+        0
+      ],
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A [[plasma]] is a gas that contains free charges, and those charges push and pull on each other from far away. That long reach is what makes the gas act collectively instead of particle by particle.",
+          "cite": [
+            4
+          ]
+        },
+        {
+          "type": "cards",
+          "items": [
+            {
+              "title": "Everywhere",
+              "text": "Stars and the solar wind make plasma most of the visible matter in the universe.",
+              "icon": "🌞"
+            },
+            {
+              "title": "In the lab",
+              "text": "Heating a gas or applying a strong electric or microwave field creates one.",
+              "icon": "🔬"
+            },
+            {
+              "title": "In industry",
+              "text": "Chip etching, lighting and surface treatment all rely on low-temperature plasmas.",
+              "icon": "💡"
+            }
+          ],
+          "cite": [
+            4,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "heading": "The screening distance",
+      "covers": [
+        1,
+        2
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "The Debye length is the distance over which a charge imbalance is screened by the surrounding particles.",
+          "page": 4,
+          "meaning": "Put an extra charge in a plasma and its neighbours rearrange to hide it. The [[Debye length]] $\\lambda_D$ says how far that hiding reaches."
+        },
+        {
+          "type": "math",
+          "origin": "book",
+          "eq": "ch03-e01",
+          "cite": [
+            4
+          ],
+          "latex": "\\lambda_D = \\sqrt{\\frac{\\epsilon_0 k_B T_e}{n e^{2}}}",
+          "caption": "The Debye length grows with temperature and shrinks as the density rises.",
+          "symbols": [
+            {
+              "sym": "\\lambda_D",
+              "meaning": "the [[Debye length]], in metres"
+            },
+            {
+              "sym": "\\epsilon_0",
+              "meaning": "the permittivity of free space, a constant"
+            },
+            {
+              "sym": "k_B T_e",
+              "meaning": "the thermal energy of the electrons"
+            },
+            {
+              "sym": "n",
+              "meaning": "the electron density"
+            },
+            {
+              "sym": "e",
+              "meaning": "the elementary charge"
+            }
+          ]
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "Zoom in below the Debye length",
+              "text": "Single charges are felt individually; the gas is not neutral here."
+            },
+            {
+              "title": "Zoom out above it",
+              "text": "Electron and ion densities almost match, which the book calls [[quasi-neutrality]]."
+            },
+            {
+              "title": "Choose the grid",
+              "text": "A simulation grid has to be finer than this length, or it cannot see the screening at all."
+            }
+          ],
+          "cite": [
+            4
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "accent",
+          "title": "Why this matters",
+          "text": "If your cell is larger than the Debye length, the simulated plasma can heat itself for purely numerical reasons.",
+          "cite": [
+            4
+          ]
+        },
+        {
+          "type": "diagram",
+          "kind": "plot",
+          "title": "Why a plasma hides a charge",
+          "cite": [
+            4
+          ],
+          "caption": "A bare charge is felt far away (Coulomb). In a plasma the neighbours screen it, so the pull dies out within a few Debye lengths.",
+          "x": {
+            "label": "distance (in units of the Debye length)",
+            "min": 0.2,
+            "max": 5
+          },
+          "y": {
+            "label": "potential (arbitrary units)",
+            "min": 0,
+            "max": 5
+          },
+          "series": [
+            {
+              "label": "bare charge, 1/r",
+              "expr": "1/x"
+            },
+            {
+              "label": "screened in a plasma, e^(−r)/r",
+              "expr": "exp(-x)/x"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "question": "A simulated cell is ten times wider than the Debye length $\\lambda_D$ of the plasma. What can your simulation not resolve?",
+      "options": [
+        "The screening of individual charges",
+        "The total number of particles",
+        "The existence of the magnetic field"
+      ],
+      "answer": 0,
+      "explain_right": "Screening happens over the Debye length, so a cell much wider than that hides it entirely.",
+      "explain_wrong": "Think about which physical effect lives at the scale of the Debye length, and what a coarse cell averages away.",
+      "cite": [
+        4
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "term": "plasma",
+      "definition": "A gas with enough free charged particles that it responds to electric and magnetic fields as a crowd.",
+      "cite": [
+        4
+      ]
+    },
+    {
+      "term": "Debye length",
+      "definition": "The distance over which the electric field of one charge is screened out by the surrounding charges.",
+      "cite": [
+        4
+      ]
+    },
+    {
+      "term": "quasi-neutrality",
+      "definition": "The near-equality of electron and ion densities when you look at distances larger than the Debye length.",
+      "cite": [
+        4
+      ]
+    }
+  ],
+  "key_takeaways": [
+    "A plasma behaves collectively because charges act over long distances.",
+    "The Debye length is the scale below which a plasma is not neutral and above which it is."
+  ],
+  "sources": {
+    "chapters": [
+      "ch03"
+    ],
+    "read_full": []
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "L-02", "title": "Why ideas matter",
+  "metaphor": "Your worldview is like the map on a phone: every idea is a landmark, and the route you take depends on which landmarks you trust.",
+  "hook": "You react instantly to a kitten and to a leopard, and you never decided how; your ideas did.",
+  "why_care": "If ideas steer how people see and act, then a talk that changes one idea can change what a listener does for years.",
+  "screens": [
+    {"id": "s1", "heading": "What is an idea?", "covers": [0], "blocks": [
+      {"type": "quote", "text": "a pattern of information that helps you understand and navigate the world", "at": 147, "speaker": "Chris Anderson", "meaning": "An idea is not a slogan. It is a piece of structure in your head that tells you how things work."},
+      {"type": "cards", "items": [
+        {"title": "Creativity in school", "text": "Sir Ken Robinson: creativity matters as much as literacy.", "icon": "🎨"},
+        {"title": "Bamboo buildings", "text": "Elora Hardy: bamboo is strong, elegant and earthquake-resistant.", "icon": "🏗️"},
+        {"title": "More than one story", "text": "Chimamanda Adichie: a single story creates stereotypes because it is incomplete.", "icon": "📖"}], "cite": [163, 179, 189]},
+      {"type": "text", "text": "Ideas come in all shapes and sizes, from complex and analytical to simple and aesthetic. Your mind links them together into a [[worldview]], which the speaker calls your brain's operating system.", "cite": [154, 203, 210]}
+    ]},
+    {"id": "s2", "heading": "Ideas decide how you react", "covers": [0, 1], "blocks": [
+      {"type": "diagram", "kind": "flow", "title": "From idea to reaction", "caption": "The same picture is read through different ideas, so the reaction differs.", "cite": [218, 229], "direction": "LR",
+       "nodes": [{"id": "a", "label": "What you see"}, {"id": "b", "label": "Ideas in your worldview"}, {"id": "c", "label": "Your reaction"}],
+       "edges": [{"from": "a", "to": "b"}, {"from": "b", "to": "c"}]},
+      {"type": "text", "text": "If your worldview holds the idea that kittens are adorable, a kitten makes you smile. If it holds the idea that leopards are dangerous, a leopard makes you tense. Different people hold very different ideas, so the same image can get opposite reactions.", "cite": [218, 229, 249]},
+      {"type": "callout", "variant": "accent", "title": "Why the speaker cares", "text": "Communicated well, an idea can change for good how someone thinks about the world and shape what they do now and later.", "cite": [280, 291]}
+    ]}
+  ],
+  "quiz": [
+    {"question": "Two audience members watch the same speaker describe a new technology. One leaves excited, the other worried. Using the video's picture of a worldview, what is the best explanation?", "options": ["One of them was not listening", "The speaker's voice was unclear", "Each reads the talk through different ideas already in their worldview", "Excitement is a personality trait unrelated to ideas"], "answer": 2, "explain_right": "The video shows the same image triggering different reactions because of the ideas each person holds.", "explain_wrong": "The other options ignore the mechanism shown: new information is interpreted through existing ideas.", "cite": [229, 249]}
+  ],
+  "glossary": [
+    {"term": "worldview", "definition": "The whole structure of linked ideas in your mind that you use to make sense of the world and decide how to react.", "cite": [203, 210]},
+    {"term": "pattern of information", "definition": "The video's definition of an idea: a structure of linked facts and relations that helps you understand and navigate the world.", "cite": [147]},
+    {"term": "stereotype", "definition": "A single, incomplete picture of a group of people; the video's example says it is not untrue but incomplete.", "cite": [189]}
+  ],
+  "key_takeaways": ["An idea is a pattern of information that helps you navigate the world.", "Your worldview is built from ideas and decides how you react.", "Changing one idea can change how someone thinks and acts for a long time."],
+  "sources": {"segments": ["s003"], "read_full": []}
+}

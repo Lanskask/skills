@@ -1,0 +1,27 @@
+{
+  "course": {"title": "TED's secret to great public speaking", "lang": "en", "course_title": "Great Talks: Building an Idea in Someone Else's Mind",
+             "audience": "someone who has to give a talk soon and has no formula"},
+  "accent": "teal",
+  "modules": [
+    {
+      "id": "M1", "video": "v01",
+      "title": "The one job of a speaker",
+      "subtitle": "Why a talk is a transfer of an idea, and four rules for making it work.",
+      "lessons": [
+        {"id": "L-01", "title": "A talk is a gift of an idea",
+         "objectives": ["Explain why there is no single formula for a great talk",
+                        "Describe the speaker's number one task as transferring an idea into listeners' minds"],
+         "source_refs": [{"segment": "s001", "keywords": ["formula", "gift", "task"]}, {"segment": "s002", "keywords": ["brain", "neurons"]}]},
+        {"id": "L-02", "title": "Why ideas matter",
+         "objectives": ["Explain what a 'worldview' is and how an idea changes how you react",
+                        "Compare an idea with a fact or a story in terms of what the listener keeps"],
+         "source_refs": [{"segment": "s003", "keywords": ["idea", "worldview", "mind"]}]},
+        {"id": "L-03", "title": "Four guidelines",
+         "objectives": ["List the four guidelines and apply each to a draft talk",
+                        "Apply the 'limit your focus' rule by cutting a talk down to one idea"],
+         "source_refs": [{"segment": "s004"}, {"segment": "s005"}, {"segment": "s006"}, {"segment": "s007"}]}
+      ]
+    }
+  ],
+  "skipped": []
+}
