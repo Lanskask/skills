@@ -60,23 +60,24 @@ gh pr create --base factory/01-x --head factory/02-y --title "02 y" --body-file 
 `gh issue create --repo OWNER/REPO --title "..." --body-file file.md [--label a,b]`. Creating issues in a public
 repository publishes the text: confirm the repository with the user when the content belongs to another project.
 
-Ticket files to issues: `python3 <skill-dir>/scripts/tickets_to_issues.py DIR` (`<skill-dir>` is this skill's base directory) is a dry run for the repo
-in the current directory; `--create` makes the missing issues and `--update` rewrites the ones whose body differs from
-the file. It closes a new issue when the file says `**Status:** done`; close an already open one yourself.
+Ticket files to issues: `python3 <skill-dir>/scripts/tickets_to_issues.py DIR` (`<skill-dir>` is this skill's base
+directory) is a dry run for the repo in the current directory; `--create` makes the missing issues and `--update`
+rewrites the ones whose body differs from the file. It closes a new issue when the file says `**Status:** done`; close
+an already open one yourself.
 
 ## "Resource not accessible by personal access token"
 
 `gh` fails with this on `gh pr merge`, `gh pr checks`, `gh run list` or `gh pr list --json statusCheckRollup` (HTTP 403)
 when the shell exports `GITHUB_TOKEN` (a limited fine-grained token). The variable overrides the keyring login, which
-has the `repo` scope. Check with `gh auth status`: the active account says `(GITHUB_TOKEN)` instead of `(keyring)`.
-Run the command without the variable, no change to the shell or settings needed:
+has the `repo` scope. Check with `gh auth status`: the active account says `(GITHUB_TOKEN)` instead of `(keyring)`. Run
+the command without the variable, no change to the shell or settings needed:
 
 ```
 env -u GITHUB_TOKEN gh pr merge 126 --merge
 ```
 
-For several PRs wrap the loop: `for n in ...; do env -u GITHUB_TOKEN gh pr merge $n --merge; done`. The permanent fix
-is a token with Pull requests, Actions and Checks read/write, or removing the export. Do not paste either token.
+For several PRs wrap the loop: `for n in ...; do env -u GITHUB_TOKEN gh pr merge $n --merge; done`. The permanent fix is
+a token with Pull requests, Actions and Checks read/write, or removing the export. Do not paste either token.
 
 ## Rules
 

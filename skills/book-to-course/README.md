@@ -1,11 +1,8 @@
 # Book to Course
 
-Based on [zarazhangrui/codebase-to-course](https://github.com/zarazhangrui/codebase-to-course): it reuses that skill's
-course format, styles and scripts, with a new pipeline for PDF books.
-
-A Claude Code skill that turns a large PDF book (or a page/chapter range) into an interactive HTML course in the same
-format as [`codebase-to-course`](https://github.com/zarazhangrui/codebase-to-course): scroll modules, quizzes, glossary
-tooltips, source ↔ plain-words blocks, plus a glossary module. Built so the LLM **never reads the whole book**.
+A Claude Code skill that turns a large PDF book (or a page/chapter range) into an interactive HTML course: scroll
+modules, quizzes, glossary tooltips, source ↔ plain-words blocks, plus a glossary module. Built so the LLM **never
+reads the whole book**.
 
 ## Quick start
 
@@ -115,7 +112,7 @@ A 40-page chapter range: ~3k digest + 3-4 lessons × 1.8k ≈ **10k input**. Cos
 ## What you get on disk
 
 ```
-<course>/ styles.css main.js book-extras.css _base.html _footer.html build.sh index.html  modules/*.html
+<course>/ course.css book-ui.js [book-math.js] _base.html _footer.html index.html  modules/*.html
 <course>/work/ manifest.json structure.json digest_all.md digests/ chapters/ selections/ outline.json drafts/ eq/ fig/ (crops, on demand) report.json usage.jsonl
 ```
 
@@ -151,4 +148,4 @@ joined without the hyphen.
 
 `assets/book-ui.js` and `assets/book-math.js` start with `// @ts-check` and use JSDoc types, so editors flag mistakes
 with no build step. `make typecheck-js` runs `tsc` (via `npx`, needs node) in strict mode against them using
-`tsconfig.json`. `main.js` is a verbatim copy and is not checked.
+`tsconfig.json`.

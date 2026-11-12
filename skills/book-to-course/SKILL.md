@@ -156,8 +156,7 @@ Monospace paragraphs are detected as code (never as equations) and appear in pac
 indentation rebuilt from the page geometry. Show the part a lesson explains with a `code` block: `code` copied verbatim
 from the page (≤ 30 lines, whitespace ignored, `...` lines allowed), `lang`, `page`, and `lines`: plain-English
 explanations per line or range (`{"at": "2-3", "text": "…"}`), optional `note` (e.g. "the book's listings are Python
-2"). It renders like the code ↔ English blocks of codebase-to-course. Do not fix or modernise the code inside `code`;
-say so in `note`.
+2"). It renders as a code ↔ plain-words spread. Do not fix or modernise the code inside `code`; say so in `note`.
 
 ### Step 3d — Exercises ("Problems" sections)
 
@@ -214,6 +213,6 @@ lessons while iterating: `render --partial`.
   `pagemap`, `eq`, `fig`, `page-image` helpers; `diagrams.py` draws SVG)
 - `scripts/make_sample_pdf.py` — synthetic test books; `tests/` — pytest; `Makefile` — setup/test/lint/demo
 - `templates/` — `outline.schema.json`, `lesson.schema.json`, `lesson.md`, `rubric.md`, `module-brief.md`, `example/`
-- `assets/` — `styles.css`, `main.js`, `_base.html`, `_footer.html` copied verbatim from codebase-to-course
+- `assets/` — `course.css` (the page design), `book-ui.js` (theme, contents, quizzes), `book-math.js`
 - `references/` — `content-philosophy.md`, `gotchas.md` (book edition)
 - `README.md` — usage and token costs; `DECISIONS.md` — why it is built this way

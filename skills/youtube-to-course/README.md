@@ -1,11 +1,8 @@
 # youtube-to-course
 
-Based on [zarazhangrui/codebase-to-course](https://github.com/zarazhangrui/codebase-to-course): it reuses that skill's
-course format, styles and scripts, with a new pipeline for YouTube videos.
-
-Turns a YouTube video, a playlist, or a time range into the same interactive HTML course that `codebase-to-course` and
-`book-to-course` make. Scripts do the mechanical work with no LLM; the model reads small digests and per-lesson
-transcript packs, and every claim links back to a moment in the video.
+Turns a YouTube video, a playlist, or a time range into the same kind of interactive HTML course as `book-to-course`.
+Scripts do the mechanical work with no LLM; the model reads small digests and per-lesson transcript packs, and every
+claim links back to a moment in the video.
 
 ## Use
 
