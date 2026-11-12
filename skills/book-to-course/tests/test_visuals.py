@@ -1,6 +1,7 @@
 """Printed-page mapping, ligature fix, task blocks, book figures and generated diagrams."""
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
@@ -226,20 +227,25 @@ def test_figure_block_checks_and_render(fig_course, tmp_path):
 from b2c_lib import ui  # noqa: E402
 
 
-@pytest.mark.parametrize("accent", sorted(ui.ACCENT_TEXT))
+def _tokens(css: str, selector: str) -> dict[str, str]:
+    """Custom properties declared in the first `selector { ... }` block of course.css."""
+    body = css.split(selector + " {", 1)[1].split("}", 1)[0]
+    return dict(re.findall(r"(--[\w-]+):\s*(#[0-9A-Fa-f]{6})", body))
+
+
+@pytest.mark.parametrize("accent", sorted(ui.PENS))
 def test_theme_colours_meet_wcag_aa(accent):
-    D = ui.DARK
-    t = ui.dark_tokens(accent, ("", "", "", ""))
-    assert ui.contrast(D["--color-text"], D["--color-bg"]) >= 7
-    assert ui.contrast(D["--color-text-secondary"], D["--color-bg"]) >= 4.5
-    assert ui.contrast(D["--color-text-secondary"], D["--color-surface"]) >= 4.5
-    assert ui.contrast(t["--color-accent-text"], D["--color-bg"]) >= 4.5
-    assert ui.contrast(t["--color-accent-text"], t["--color-accent-light"]) >= 4.5      # chips: accent text on accent tint
-    assert ui.contrast("#FFFFFF", t["--color-accent"]) >= 4.5                           # buttons: white text on accent fill
-    assert ui.contrast(ui.ACCENT_TEXT[accent][0], "#FAF7F2") >= 4.5                    # light theme accent text on page
-    assert ui.contrast("#FFFFFF", ui.ensure_white_contrast("#D94F30")) >= 4.5
-    for k in ("--color-success", "--color-error", "--color-info"):
-        assert ui.contrast(D[k], D["--color-surface"]) >= 4.5
+    css = (ROOT / "assets" / "course.css").read_text()
+    light, dark = _tokens(css, ":root"), _tokens(css, ':root[data-theme="dark"]')
+    for t in (light, dark):
+        assert ui.contrast(t["--ink"], t["--paper"]) >= 7                       # body text
+        assert ui.contrast(t["--ink-2"], t["--paper"]) >= 4.5                   # secondary text, margin notes
+        assert ui.contrast(t["--ink-2"], t["--sheet"]) >= 4.5                   # secondary text on raised surfaces
+        for k in ("--ok", "--bad"):
+            assert ui.contrast(t[k], t["--sheet"]) >= 4.5                       # quiz feedback
+    lp, dp = ui.PENS[accent]
+    assert ui.contrast(lp, light["--paper"]) >= 4.5 and ui.contrast("#FFFFFF", lp) >= 4.5      # pen text; white on pen buttons
+    assert ui.contrast(dp, dark["--paper"]) >= 4.5 and ui.contrast(dark["--paper"], dp) >= 4.5  # dark: pen text; dark text on pen
 
 
 def test_course_has_theme_toc_home_and_a11y_hooks(course):
@@ -247,19 +253,22 @@ def test_course_has_theme_toc_home_and_a11y_hooks(course):
     render.render(work, work.out)
     html = (work.out / "index.html").read_text()
     head = html.split("</head>")[0]
-    assert "localStorage.getItem('b2c-theme')" in head and head.index("b2c-theme") < head.index("styles.css")   # theme applied before first paint
+    assert "localStorage.getItem('b2c-theme')" in head and head.index("b2c-theme") < head.index("course.css")   # theme applied before first paint
     assert 'name="color-scheme"' in head and "<noscript>" in head and "book-ui.js" in head
     assert 'class="skip-link" href="#main"' in html
     assert 'id="theme-toggle"' in html and 'aria-pressed="false"' in html and 'aria-label="Dark theme"' in html
     assert 'id="nav-home"' in html and "data-toc-open" in html and 'id="toc"' in html and 'aria-controls="toc"' in html
     assert 'id="home"' in html and 'class="cover"' in html and 'class="module"' not in html.split('id="home"')[1].split("</section>")[0]
     assert 'href="#l-01"' in html and 'data-spy="module-1"' in html and 'href="#module-2"' in html      # contents lists lessons + glossary
-    assert 'role="tab"' not in html and 'role="group"' in html                                         # dots were role=tab without panels
-    css = (work.out / "book-extras.css").read_text()
+    assert 'role="tab"' not in html and '<fieldset class="quiz-question-block"' in html and 'type="radio"' in html  # native radios
+    assert 'class="gloss"' in html                                                                     # definitions sit in the margin
+    css = (work.out / "course.css").read_text()
     assert ':root[data-theme="dark"]' in css and "prefers-color-scheme: dark" in css and "prefers-reduced-motion" in css and "@media print" in css
-    assert css.count("--color-bg:") >= 2 and ":focus-visible" in css
+    assert css.count("--paper:") >= 3 and ":focus-visible" in css and "::selection" in css
     js = (work.out / "book-ui.js").read_text()
-    assert "stopImmediatePropagation" in js and "Escape" in js and "localStorage" in js and "catch" in js
+    assert "stopImmediatePropagation" in js and "Escape" in js and "localStorage" in js and "catch" in js and "quiz-check-btn" in js
+    for gone in ("styles.css", "main.js", "book-extras.css"):                                          # third-party assets replaced
+        assert not (work.out / gone).exists() and gone not in head
 
 
 def test_cover_is_before_modules_and_toc_is_after_nav(course):
