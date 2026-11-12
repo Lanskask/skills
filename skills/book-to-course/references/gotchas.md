@@ -24,7 +24,7 @@
 - **Header stripping is aggressive by design** (any line repeated on ≥ 3 pages in the margin band). If a real heading
   vanished, check `work/clean_report.json`.
 - **Walls of text, recycled metaphors, memory-test quizzes, mandatory scroll-snap** — same rules as codebase-to-course
-  (see `interactive-elements.md`, `design-system.md`; those two files are copied verbatim).
+  (see `content-philosophy.md`).
 - **Figures are found by captions.** A figure without a caption line (or with the caption in an image) has no id. Figures made of scanned pixels, or drawn inside a full-page
   image, cannot be cropped; use a `diagram`. The crop is the graphics adjacent to the caption plus text inside it (axis labels); neighbouring panels sharing a
   caption may come out together.

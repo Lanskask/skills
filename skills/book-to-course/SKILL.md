@@ -148,6 +148,6 @@ Render only ready lessons while iterating: `render --partial`.
 - `scripts/b2c.py` + `scripts/b2c_lib/` — pipeline (extract, clean, structure, split, digest, select, validate, render; `pagemap`, `eq`, `fig`, `page-image` helpers; `diagrams.py` draws SVG)
 - `scripts/make_sample_pdf.py` — synthetic test books; `tests/` — pytest; `Makefile` — setup/test/lint/demo
 - `templates/` — `outline.schema.json`, `lesson.schema.json`, `lesson.md`, `rubric.md`, `module-brief.md`, `example/`
-- `assets/` — `styles.css`, `main.js`, `_base.html`, `_footer.html`, `build.sh` copied verbatim from codebase-to-course
-- `references/` — `content-philosophy.md`, `gotchas.md` (book edition); `interactive-elements.md`, `design-system.md` (verbatim copies)
+- `assets/` — `styles.css`, `main.js`, `_base.html`, `_footer.html` copied verbatim from codebase-to-course
+- `references/` — `content-philosophy.md`, `gotchas.md` (book edition)
 - `README.md` — usage and token costs; `DECISIONS.md` — why it is built this way

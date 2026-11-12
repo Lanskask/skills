@@ -1,6 +1,6 @@
 """Stage 8 — render validated lesson drafts into the codebase-to-course HTML layout.
 
-course/  styles.css main.js book-extras.css _base.html _footer.html build.sh  modules/NN-slug.html  index.html
+course/  styles.css main.js book-extras.css _base.html _footer.html  modules/NN-slug.html  index.html
 The assets are copied byte-for-byte from assets/ (never regenerated). Only module HTML is produced here.
 """
 from __future__ import annotations
@@ -250,7 +250,7 @@ def init_course(work: Work, course_dir: Path, outline: dict, module_titles: list
                 has_math: bool = False, toc_html: str = "") -> None:
     course_dir.mkdir(parents=True, exist_ok=True)
     (course_dir / "modules").mkdir(exist_ok=True)
-    for f in ("styles.css", "main.js", "_footer.html", "build.sh"):
+    for f in ("styles.css", "main.js", "_footer.html"):
         shutil.copyfile(ASSETS / f, course_dir / f)
     accent_name = outline.get("accent", "teal")
     (course_dir / "book-extras.css").write_text(EXTRA_CSS + ui.ui_css(accent_name, ACCENTS[accent_name]), encoding="utf-8")

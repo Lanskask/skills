@@ -90,5 +90,5 @@ It does **not** guarantee the lesson is correct, well taught, or that a garbled 
 ## Files
 - `scripts/y2c.py` + `scripts/y2c_lib/` — `fetch, transcript, clean, frames, segment, digest, select, validate, render` (+ `diagrams`, `mathtex`, `ui` copied from book-to-course); `scripts/whisper_worker.py` — local ASR
 - `templates/` — `outline.schema.json`, `lesson.schema.json`, `lesson.md`, `rubric.md`, `module-brief.md`, `example/` (a real 3-lesson course on an 8-minute talk)
-- `assets/` — `styles.css`, `main.js`, `_base.html`, `_footer.html`, `build.sh` copied from codebase-to-course; `references/` — `content-philosophy.md`, `gotchas.md`, `interactive-elements.md`, `design-system.md`
+- `assets/` — `styles.css`, `main.js`, `_base.html`, `_footer.html` copied from codebase-to-course; `references/` — `content-philosophy.md`, `gotchas.md`
 - `tests/` — pytest, offline (`make test`); `Makefile`; `README.md` — usage, token costs, limits; `DECISIONS.md` — why it is built this way
