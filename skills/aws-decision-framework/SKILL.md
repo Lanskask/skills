@@ -1,6 +1,6 @@
 ---
 name: aws-decision-framework
-description:
+description: >-
   Use for ANY question that picks between AWS services, features or designs, even a short one you could answer from
   memory: "Lambda or Fargate?", "SQS, SNS or EventBridge?", "DynamoDB or Aurora?", "ALB or NLB?", "is this enough
   (Config rule, replica, DNS failover)?", "which service does X?", or a review of an AWS design proposal, brief or
