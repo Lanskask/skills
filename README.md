@@ -5,13 +5,14 @@ mechanical work into scripts so the model spends few tokens.
 
 ## Skills
 
-| Skill                                           | What it does                                                                                             |
-| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| [`disk-cleanup`](skills/disk-cleanup)           | Ranks caches, build dirs and big files by size and safety, deletes the safe ones (macOS, Linux, Windows) |
-| [`book-to-course`](skills/book-to-course)       | Turns a PDF book or a page range into an interactive HTML course with cited pages                        |
-| [`youtube-to-course`](skills/youtube-to-course) | Turns a YouTube video, playlist or time range into an interactive HTML course with timestamps            |
-| [`openapi-optimizer`](skills/openapi-optimizer) | Splits and compresses large OpenAPI/Swagger specs so agents read 60-95% fewer tokens                     |
-| [`github-cli`](skills/github-cli)               | Pushing branches, stacked PRs and issues with `gh`, and fixes for its common errors                      |
+| Skill                                                     | What it does                                                                                             |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| [`disk-cleanup`](skills/disk-cleanup)                     | Ranks caches, build dirs and big files by size and safety, deletes the safe ones (macOS, Linux, Windows) |
+| [`book-to-course`](skills/book-to-course)                 | Turns a PDF book or a page range into an interactive HTML course with cited pages                        |
+| [`youtube-to-course`](skills/youtube-to-course)           | Turns a YouTube video, playlist or time range into an interactive HTML course with timestamps            |
+| [`openapi-optimizer`](skills/openapi-optimizer)           | Splits and compresses large OpenAPI/Swagger specs so agents read 60-95% fewer tokens                     |
+| [`github-cli`](skills/github-cli)                         | Pushing branches, stacked PRs and issues with `gh`, and fixes for its common errors                      |
+| [`aws-decision-framework`](skills/aws-decision-framework) | Picks between AWS services and checks design proposals: priority first, then eliminate, then rank        |
 
 ## Install
 

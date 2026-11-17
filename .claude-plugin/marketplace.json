@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "lanskask",
-  "description": "Skills by Lanskask: disk cleanup, PDF/YouTube to interactive courses, OpenAPI optimization, GitHub CLI.",
+  "description": "Skills by Lanskask: disk cleanup, PDF/YouTube to interactive courses, OpenAPI optimization, GitHub CLI, AWS decision framework.",
   "owner": { "name": "Lanskask", "url": "https://github.com/Lanskask" },
   "plugins": [
     {
@@ -11,7 +11,7 @@
       "description": "All skills in this repo.",
       "homepage": "https://github.com/Lanskask/skills",
       "license": "MIT",
-      "keywords": ["skills", "disk-cleanup", "courses", "openapi", "github"]
+      "keywords": ["skills", "disk-cleanup", "courses", "openapi", "github", "aws"]
     }
   ]
 }
