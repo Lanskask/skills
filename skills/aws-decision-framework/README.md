@@ -14,9 +14,11 @@ this skill to pick between options.
 
 ## Files
 
-- `SKILL.md`: the questions to ask, the order of work, priority table, bad-proposal shapes, resilience rules.
-- `references/tiebreakers.md`: the deciding axis for each pair of look-alike services.
-- `references/limits.md`: the numbers that end designs.
+- `SKILL.md`: the short form (questions to ask, order of work, priority table, bad-proposal shapes, resilience rules)
+  and an index of the reference files.
+- `references/`: the whole source article, split by topic and loaded on demand: `reasoning.md` (Part One), the five
+  service-area files `compute.md`, `storage-and-data.md`, `networking-edge.md`, `identity-security.md` and
+  `operations-and-integration.md` (Part Two), and `tiebreakers.md`, `limits.md` and `lesser-known.md` (Part Three).
 
 ## Source
 

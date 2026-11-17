@@ -85,19 +85,3 @@ For each confusing pair, find the one axis that separates the services. Paraphra
   and Region for a deeper discount; databases, caches and warehouses use reserved instances or nodes; DynamoDB has its
   own reserved capacity. For guaranteed capacity use On-Demand Capacity Reservations spread across zones (a zonal
   reservation in one zone guarantees capacity in the zone that just failed).
-
-## EC2 specifics
-
-- **Placement groups**: cluster (one AZ, low latency, tightly coupled HPC); spread (separate hardware, max 7 per AZ, few
-  critical instances); partition (rack-aware systems like HDFS, HBase, Cassandra); precision time (microsecond clock
-  sync). Capacity error on a cluster group: stop and start all instances in it.
-- **Families**: M general default; C compute; R/X memory; T burstable (throttles to baseline when credits run out).
-  Graviton gives better price-performance if the workload can be recompiled. Right-size the size before the family.
-  Memory is not a default metric; it needs the CloudWatch agent.
-- **Shell access**: Session Manager records session content, no inbound port. Instance Connect gives a one-time key and
-  logs only the key push in CloudTrail. Storing SSH keys in a secrets manager does not audit anything.
-- **Source/destination check**: disable on NAT, proxy, router and firewall instances or traffic silently drops.
-- **Images**: bake software, never licence keys, IPs or tokens. Image creation reboots by default. EC2 Image Builder
-  makes image builds reproducible.
-- **Instance metadata**: require IMDSv2 everywhere and enforce it with an SCP; it protects the credential, least
-  privilege limits what the credential is worth.

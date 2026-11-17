@@ -54,3 +54,22 @@ Figures as reported by the source article (Nov 2026). Unverified; confirm in AWS
 - S3 Bucket Keys cut KMS request cost by up to 99%. CloudFront egress is cheaper than serving from S3 directly.
 - Cost allocation tags are not retroactive and take up to 24 h to appear. Cost Explorer keeps 12 months.
 - Spot: 2 minutes warning; savings 60-70% typical, up to 90%. Graviton: up to 40% better price-performance.
+
+## More figures from Part Three
+
+- Lambda Managed Instances allow up to 90 minutes only for async and event-source-mapping invocations, not synchronous.
+- Direct Connect: a transit virtual interface no longer needs a minimum circuit speed (the 1 Gbps figure is stale).
+  MACsec is on dedicated connections at higher port speeds, not 1 Gbps. One Direct Connect gateway reaches many Regions,
+  up to 20 virtual private gateway and 6 transit gateway associations, and never routes between two transit gateways.
+- CloudFront accepts GET, HEAD, OPTIONS, PUT, POST, PATCH and DELETE only, and its certificate must be in `us-east-1`.
+- Textract: 1 page synchronous; up to 500 MB and 3,000 pages asynchronous from S3. Comprehend real-time input: 100 KB.
+- Trusted Advisor low-utilization check: 10% or less CPU and 5 MB or less network I/O on 4 or more of the past 14 days;
+  needs a Business or Enterprise support plan.
+- CloudHSM: `hsm2m.medium` is FIPS 140-3 Level 3 (certificate #4703). The older `hsm1.medium` FIPS 140-2 Level 3
+  certificate moved to NIST's historical list in January 2026, so "CloudHSM is FIPS 140-2 Level 3" describes retired
+  hardware.
+- Route 53 Application Recovery Controller spreads its data plane across five Regions so a Regional failure cannot take
+  out the thing you depend on during it.
+- Stale rules to drop: Firehose "can never be near-real-time" (zero buffering lands records in about 5 s; not for the S3
+  backup destination or dynamic partitioning; sub-minute S3 intervals raise request costs). S3 object maximum is 48.8
+  TiB, not 5 TB.

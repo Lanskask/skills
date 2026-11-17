@@ -108,11 +108,20 @@ Check every proposal against these before ranking.
 
 ## References
 
-Load only the one the question needs.
+The sections above are the short form. Load only the file the question needs; each one keeps every rule from its part of
+the source article.
 
-- `references/tiebreakers.md`: the deciding axis for messaging, load balancing, storage, databases, analytics, identity,
-  security, migration and commitments, plus EC2 specifics (placement groups, instance families, instance metadata).
-- `references/limits.md`: the numbers that end designs (runtime, payload, throughput, failover and recovery ladders).
+| File                                       | Load for                                                                                                                              |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `references/reasoning.md`                  | Reviewing a proposal: full priority list, all seven bad shapes, look-alike table, resilience                                          |
+| `references/tiebreakers.md`                | Which of two look-alike services: the deciding axis per pair                                                                          |
+| `references/limits.md`                     | Numbers that end designs: runtime, payload, throughput, failover and recovery ladders                                                 |
+| `references/compute.md`                    | EC2, Auto Scaling, Lambda, ECS/EKS/Fargate/Batch, container registry                                                                  |
+| `references/storage-and-data.md`           | S3, EFS/FSx, Storage Gateway/DataSync/Snow, RDS/Aurora, DynamoDB, analytics, streaming                                                |
+| `references/networking-edge.md`            | VPC, peering/Transit Gateway/PrivateLink, Direct Connect/VPN, Route 53, load balancers, CloudFront, WAF/Shield, API Gateway           |
+| `references/identity-security.md`          | IAM, Organizations (SCP/RCP), KMS and secrets, security services, directories                                                         |
+| `references/operations-and-integration.md` | CloudFormation, Systems Manager, observability, CI/CD, migration and DR, cost, SQS/SNS/EventBridge/Step Functions, platforms, IoT, ML |
+| `references/lesser-known.md`               | Narrow-job services (S3 Object Lambda, Lake Formation, AppFlow, AppConfig and others)                                                 |
 
 Numbers and service facts come from one article written in Nov 2026. Treat them as unverified and check current AWS
 documentation before a decision that depends on a specific figure.
