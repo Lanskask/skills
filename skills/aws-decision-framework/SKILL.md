@@ -1,9 +1,11 @@
 ---
 name: aws-decision-framework
 description:
-  Use when choosing between AWS services or designs, e.g. "Lambda or Fargate?", "DynamoDB or Aurora?", "SQS, SNS or
-  EventBridge?", "ALB or NLB?", or when judging an AWS design proposal or exam-style scenario. Applies a fixed order
-  (priority, forbidding constraint, bottleneck, eliminate, rank, check numbers). For designing a whole system,
+  Use for ANY question that picks between AWS services, features or designs, even a short one you could answer from
+  memory: "Lambda or Fargate?", "SQS, SNS or EventBridge?", "DynamoDB or Aurora?", "ALB or NLB?", "is this enough
+  (Config rule, replica, DNS failover)?", "which service does X?", or a review of an AWS design proposal, brief or
+  exam-style scenario. Load it before answering: it carries the checks that catch impossible combinations, fabricated
+  features, wrong-direction wiring, stale limits and detective-vs-preventive mix-ups. For designing a whole system,
   migration, DR plan or landing zone use `cloud-architect` instead; use this one for picking between options.
 ---
 
