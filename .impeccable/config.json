@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/assigned.html"
+        ],
+        "createdAt": "2026-11-12T17:04:10.084Z",
+        "reason": "model: dashed segment marks the not-yet-travelled route, a functional state mark"
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/challenger-cutting-bench.html"
+        ],
+        "createdAt": "2026-11-12T17:04:10.139Z",
+        "reason": "model: film perforations are the dealt world's signature rail, not decoration"
+      }
+    ]
+  }
+}

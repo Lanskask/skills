@@ -188,9 +188,9 @@ def test_example_course_validates_and_renders(en, tmp_path):
     p = P()
     p.feed(html)
     assert not p.errs and not p.stack
-    assert html.count('class="module"') == 2 and 'data-definition="' in html and "src-ref" in html
+    assert html.count('class="module"') == 2 and 'class="gloss"' in html and "src-ref" in html
     assert "COURSE_TITLE" not in html and "ACCENT_" not in html and "NAV_DOTS" not in html
-    for f in ("styles.css", "main.js"):  # copied verbatim
+    for f in ("course.css", "book-ui.js"):  # the skill's own assets, copied as they are
         assert (work.out / f).read_bytes() == (ROOT / "assets" / f).read_bytes()
 
 

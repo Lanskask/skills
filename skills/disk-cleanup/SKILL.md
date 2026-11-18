@@ -21,4 +21,4 @@ needs only the standard library.
 4. Dry run first: `python3 SCRIPT clean safe rebuild`. Selectors are `safe`, `rebuild`, or a part of a path
    (`Caches/uv`). After approval, add `--yes`.
 5. Report the `disk free changed` line. If a new location is missing from the report, add it to `KNOWN` in the script
-   and a test to `test_disk_cleanup.py`.
+   and a test to `tests/test_disk_cleanup.py`.

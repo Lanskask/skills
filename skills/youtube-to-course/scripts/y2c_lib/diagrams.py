@@ -370,31 +370,3 @@ def render_plot(d: dict, uid: str) -> str:
 
 def render_svg(d: dict, uid: str) -> str:
     return render_flow(d, uid) if d["kind"] == "flow" else render_plot(d, uid)
-
-
-CSS = """/* diagrams (book-to-course) */
-.diagram, .book-figure { margin: 2rem 0; padding: 1rem 1.25rem 1.1rem; background: var(--color-surface); border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm); }
-.diagram svg { width: 100%; height: auto; display: block; margin: 0 auto; }
-.diagram figcaption, .book-figure figcaption { margin-top: .7rem; font-size: .92rem; color: var(--color-text-secondary); }
-.diagram .fig-title { font-family: var(--font-display); font-weight: 600; margin: 0 0 .5rem; }
-.fig-tag { display: inline-block; margin-right: .5em; padding: 0 .55em; font-size: .72em; line-height: 1.8; border-radius: 999px;
-  background: var(--color-accent-light); color: var(--color-accent-text); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
-.book-figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: 6px; background: #fff; }
-.dg text { font-family: var(--font-body); }
-.dg-node { fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 2; }
-.dg-n1 { stroke: var(--color-actor-1, var(--color-accent)); } .dg-n2 { stroke: var(--color-actor-2, var(--color-accent)); }
-.dg-n3 { stroke: var(--color-actor-3, var(--color-accent)); } .dg-n4 { stroke: var(--color-actor-4, var(--color-accent)); }
-.dg-label { font-size: 14px; fill: var(--color-text); } .dg-elabel { font-size: 12px; fill: var(--color-text-secondary); }
-.dg-edge { stroke: var(--color-text-secondary); stroke-width: 2; fill: none; } .dg-back { stroke-dasharray: 6 4; stroke: var(--color-accent); }
-.dg-arrow { fill: var(--color-text-secondary); }
-.dg-grid { stroke: var(--color-border); stroke-width: 1; } .dg-frame { fill: none; stroke: var(--color-text-secondary); stroke-width: 1.2; }
-.dg-tick { font-size: 11px; fill: var(--color-text-secondary); } .dg-axis { font-size: 13px; fill: var(--color-text); }
-.dg-legend { font-size: 13px; fill: var(--color-text); }
-.dg-line { fill: none; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
-.dg-s0 { stroke: var(--color-actor-1); }
-.dg-s1 { stroke: var(--color-actor-2); stroke-dasharray: 9 6; }
-.dg-s2 { stroke: var(--color-actor-3); stroke-dasharray: 2 6; }
-.dg-s3 { stroke: var(--color-actor-5); stroke-dasharray: 12 5 2 5; }
-.dg-pt { fill: var(--color-text); stroke: var(--color-bg); stroke-width: 1.5; }
-"""

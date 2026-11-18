@@ -1,5 +1,5 @@
 // @ts-check
-/* book-to-course UI: theme toggle, contents drawer, home, keyboard. No dependencies. */
+/* book-to-course page script: theme toggle, contents drawer, reading progress, quizzes. No dependencies. */
 (function () {
   'use strict';
   var root = document.documentElement;
@@ -83,39 +83,19 @@
     });
   });
 
-  /* ── keyboard (capture phase: runs before main.js) ── */
-  function modules() { return $$('.module'); }
-  function currentModule() {
-    var mid = window.scrollY + window.innerHeight / 2, m = modules();
-    for (var i = 0; i < m.length; i++) {
-      var top = m[i].getBoundingClientRect().top + window.scrollY;
-      if (mid >= top && mid < top + m[i].offsetHeight) return i;
-    }
-    return -1;
-  }
+  /* ── keyboard: while the drawer is open, keys stay inside it ── */
   window.addEventListener('keydown', function (/** @type {KeyboardEvent} */ e) {
-    if (e.altKey || e.ctrlKey || e.metaKey) return;
-    var arrows = ['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].indexOf(e.key) > -1;
-    if (isOpen()) {
-      if (e.key === 'Escape') { setOpen(false); e.preventDefault(); return; }
-      if (e.key === 'Tab') {
-        var f = $$('a[href], button:not([disabled])', /** @type {HTMLElement} */ (toc)).filter(function (x) { return x.offsetParent !== null; });
-        if (!f.length) return;
-        var first = f[0], last = f[f.length - 1];
-        if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
-        else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
-        return;
-      }
-      if (arrows) e.stopImmediatePropagation();   // arrows must not page through modules behind the drawer
+    if (e.altKey || e.ctrlKey || e.metaKey || !isOpen()) return;
+    if (e.key === 'Escape') { setOpen(false); e.preventDefault(); return; }
+    if (e.key === 'Tab') {
+      var f = $$('a[href], button:not([disabled])', /** @type {HTMLElement} */ (toc)).filter(function (x) { return x.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+      else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
       return;
     }
-    if (!arrows || ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(/** @type {HTMLElement} */ (e.target).tagName) > -1) return;
-    var m = modules(), idx = currentModule(), fwd = e.key === 'ArrowDown' || e.key === 'ArrowRight';
-    if (fwd && idx === -1 && cover && m[0]) {            // on the cover: go to the first module (main.js would skip it)
-      m[0].scrollIntoView({ behavior: behavior() }); e.preventDefault(); e.stopImmediatePropagation();
-    } else if (!fwd && idx === 0 && cover) {             // first module: up goes home
-      cover.scrollIntoView({ behavior: behavior() }); e.preventDefault(); e.stopImmediatePropagation();
-    }
+    if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', ' '].indexOf(e.key) > -1 && toc && !toc.contains(/** @type {Node} */ (e.target))) e.stopImmediatePropagation();
   }, true);
 
   /* ── scroll spy + progress ── */
@@ -123,7 +103,7 @@
   var spy = links.map(function (a) { return { a: a, el: document.getElementById(a.getAttribute('data-spy') || '') }; })
                  .filter(function (x) { return x.el; })
                  .map(function (x) { return { a: x.a, el: /** @type {HTMLElement} */ (x.el) }; });
-  var bar = $('#toc-progress-bar'), pct = $('#toc-pct');
+  var bar = $('#toc-progress-bar'), pct = $('#toc-pct'), top = $('#bar-progress'), where = $('#bar-where');
   var ticking = false;
   function update() {
     ticking = false;
@@ -143,9 +123,46 @@
     var max = document.documentElement.scrollHeight - window.innerHeight;
     var p = max > 0 ? Math.min(100, Math.round(y / max * 100)) : 0;
     if (bar) bar.style.width = p + '%';
+    if (top) top.style.setProperty('--read', String(p / 100));
+    if (where) where.textContent = cur > -1 ? (spy[cur].a.textContent || '').replace(/^\d+/, '').trim() : '';
     if (pct) pct.textContent = p + '%';
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   window.addEventListener('resize', update);
   update();
+
+  /* ── quizzes: native radios; Check marks each question and explains, Try again clears ── */
+  $$('.quiz-container').forEach(function (box) {
+    var check = $('.quiz-check-btn', box), reset = $('.quiz-reset-btn', box);
+    var qs = $$('.quiz-question-block', box);
+    if (!check || !reset) return;
+    check.addEventListener('click', function () {
+      qs.forEach(function (q) {
+        var picked = /** @type {HTMLInputElement | null} */ ($('input:checked', q)), fb = $('.quiz-feedback', q);
+        if (!fb) return;
+        var right = !!picked && picked.value === q.getAttribute('data-correct');
+        $$('.quiz-option', q).forEach(function (o) {
+          var inp = /** @type {HTMLInputElement} */ ($('input', o));
+          o.classList.toggle('is-right', inp.value === q.getAttribute('data-correct'));
+          o.classList.toggle('is-wrong', inp.checked && !right);
+        });
+        fb.className = 'quiz-feedback ' + (right ? 'is-right' : 'is-wrong');
+        fb.setAttribute('role', 'status');
+        fb.innerHTML = picked ? '<b>' + box.getAttribute(right ? 'data-right' : 'data-wrong') + '</b>' + q.getAttribute(right ? 'data-explanation-right' : 'data-explanation-wrong')
+                              : '<b>' + box.getAttribute('data-pick') + '</b>';
+        if (picked) /** @type {HTMLFieldSetElement} */ (q).disabled = true;
+      });
+      check.disabled = qs.every(function (q) { return /** @type {HTMLFieldSetElement} */ (q).disabled; });
+      reset.hidden = false;
+    });
+    reset.addEventListener('click', function () {
+      qs.forEach(function (q) {
+        /** @type {HTMLFieldSetElement} */ (q).disabled = false;
+        $$('input', q).forEach(function (i) { /** @type {HTMLInputElement} */ (i).checked = false; });
+        $$('.quiz-option', q).forEach(function (o) { o.classList.remove('is-right', 'is-wrong'); });
+        var fb = $('.quiz-feedback', q); if (fb) { fb.className = 'quiz-feedback'; fb.textContent = ''; }
+      });
+      check.disabled = false; reset.hidden = true;
+    });
+  });
 })();

@@ -9,6 +9,7 @@
   "accent": {
    "type": "string",
    "enum": [
+    "indigo",
     "vermillion",
     "coral",
     "teal",

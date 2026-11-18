@@ -11,13 +11,18 @@ _END = re.compile(r"[.!?…:;»\")\]]$")
 
 
 def body_size(pages: list[dict]) -> float:
-    """Most common font size weighted by characters = body text size (0 if OCR-only)."""
+    """Most common font size weighted by characters = body text size.
+
+    0 means sizes carry no signal: OCR-only pages, or a scan's hidden OCR layer where every line has its own size."""
     c: Counter = Counter()
     for pg in pages:
         for ln in pg["lines"]:
             if ln["s"] > 0:
                 c[ln["s"]] += ln.get("w", len(ln["t"]))
-    return c.most_common(1)[0][0] if c else 0.0
+    if not c:
+        return 0.0
+    size, n = c.most_common(1)[0]
+    return size if n >= 0.25 * sum(c.values()) else 0.0
 
 
 def join_lines(prev: str, nxt: str) -> str:

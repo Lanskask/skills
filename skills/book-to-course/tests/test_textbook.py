@@ -280,3 +280,31 @@ def test_formula_checked_against_image_is_book_origin(tbcourse):
     r = _check(work, les)
     assert not r.errors, r.errors
     assert any("accepted because you checked it against the page image" in w for w in r.warnings)
+
+
+def test_body_size_ignores_noisy_ocr_text_layer():
+    """A scan's hidden OCR layer gives every line its own size (5-9 pt); size then says nothing about headings."""
+    from b2c_lib.paras import body_size
+    line = lambda s: {"s": s, "t": "x" * 60}  # noqa: E731
+    clean = [{"lines": [line(10.0)] * 40 + [line(14.0)] * 3}]
+    noisy = [{"lines": [line(round(6.0 + 0.1 * (i % 31), 1)) for i in range(200)]}]
+    assert body_size(clean) == 10.0
+    assert body_size(noisy) == 0.0
+
+
+def test_hidden_ocr_layer_in_courier_is_prose_not_code(tmp_path):
+    """Scanned books often carry an invisible OCR text layer set in Courier; it is prose, not a code listing."""
+    import pymupdf
+    from b2c_lib.common import Work
+    from b2c_lib.extract import extract
+    pdf = tmp_path / "scan_layer.pdf"
+    doc = pymupdf.open()
+    page = doc.new_page()
+    for k in range(30):
+        page.insert_text((72, 72 + 20 * k), "Adding people to a late software project makes it later, he wrote.",
+                         fontname="cour", fontsize=9, render_mode=3)
+    doc.save(pdf)
+    work = Work(tmp_path / "out")
+    extract(pdf, work, (1, 1), ocr="off")
+    lines = read_json(next(work.pages.glob("*.json")))["lines"]
+    assert lines and not any(ln.get("mono") for ln in lines)

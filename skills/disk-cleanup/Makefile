@@ -8,7 +8,7 @@ scan: ## read-only scan of ~ (about 90 s)
 	python3 $(SCRIPT) scan
 
 test: ## run tests against a fake home
-	uvx pytest -q test_disk_cleanup.py
+	uvx pytest -q tests
 
 lint: ## ruff check
 	uvx ruff check --line-length 120 .

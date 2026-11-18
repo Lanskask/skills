@@ -65,7 +65,13 @@ def _flags_italic(span: dict) -> bool:
     return bool(span["flags"] & 2) or bool(re.search(r"italic|oblique", span["font"], re.I))
 
 
-def _lines_from_dict(pdict: dict) -> list[dict]:
+def _hidden_text_layer(page) -> bool:
+    """Most characters drawn invisible (PDF render mode 3): a scan's OCR layer, whose font (often Courier) means nothing."""
+    kinds = [t["type"] for t in page.get_texttrace() for _ in t["chars"]]
+    return bool(kinds) and kinds.count(3) > 0.8 * len(kinds)
+
+
+def _lines_from_dict(pdict: dict, ocr_layer: bool = False) -> list[dict]:
     lines: list[dict] = []
     blk = 0
     for block in pdict["blocks"]:
@@ -87,7 +93,7 @@ def _lines_from_dict(pdict: dict) -> list[dict]:
             it = [] if all_ital else [s["text"].strip() for s in spans if _flags_italic(s)]
             mchars = sum(1 for c in text if c in MATH_CHARS)
             mfont = any(MATH_FONT.search(s["font"]) for s in spans)
-            mono = all(bool(s["flags"] & 8) or bool(MONO_FONT.search(s["font"])) for s in spans)
+            mono = not ocr_layer and all(bool(s["flags"] & 8) or bool(MONO_FONT.search(s["font"])) for s in spans)
             rec = {
                 "t": text,
                 "s": round(size, 1),
@@ -165,7 +171,7 @@ def extract(pdf: Path, work: Work, pages: tuple[int, int] | None, ocr: str = "au
     empty_pages: list[int] = []
     for pno in range(a, b + 1):
         page = doc[pno - 1]
-        lines = _lines_from_dict(page.get_text("dict"))
+        lines = _lines_from_dict(page.get_text("dict"), _hidden_text_layer(page))
         chars = sum(len(x["t"]) for x in lines)
         used_ocr = False
         scanned = chars < MIN_CHARS_TEXT_PAGE and bool(page.get_images(full=False))

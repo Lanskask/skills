@@ -36,12 +36,6 @@ By hand: copy one folder from `skills/` into `~/.claude/skills/` (all your proje
 Each skill's README lists what it needs: `disk-cleanup` only Python 3.9+, the course skills
 [`uv`](https://docs.astral.sh/uv/) (and `yt-dlp` for YouTube).
 
-## Credits
-
-`book-to-course` and `youtube-to-course` are based on
-[zarazhangrui/codebase-to-course](https://github.com/zarazhangrui/codebase-to-course): they reuse its course format,
-styles and HTML scripts, with new pipelines for PDF books and YouTube videos.
-
 ## Develop
 
 `make` lists the commands: `make validate` checks the plugin manifests, `make test` runs each skill's tests. To add a

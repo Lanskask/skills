@@ -6,7 +6,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-SCRIPT = Path(__file__).parent / "disk_cleanup.py"
+SCRIPT = Path(__file__).parent.parent / "disk_cleanup.py"
 MB2 = b"x" * 2_000_000
 
 
