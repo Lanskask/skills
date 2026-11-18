@@ -1,12 +1,13 @@
 ---
 name: aws-decision-framework
 description: >-
-  Use for ANY question that picks between AWS services, features or designs, even a short one you could answer from
-  memory: "Lambda or Fargate?", "SQS, SNS or EventBridge?", "DynamoDB or Aurora?", "ALB or NLB?", "is this enough
-  (Config rule, replica, DNS failover)?", "which service does X?", or a review of an AWS design proposal, brief or
-  exam-style scenario. Load it before answering: it carries the checks that catch impossible combinations, fabricated
+  MUST be invoked before answering any AWS question that asks which service, feature or design to use, or whether a
+  proposed one is right or enough. This applies however short or familiar the question is, and you must not answer it
+  from memory first. Triggers include "Lambda or Fargate?", "SQS, SNS or EventBridge?", "DynamoDB or Aurora?", "ALB or
+  NLB?", "is a Config rule enough?", "which AWS service does X?", "how do I make X fail over faster?", and any review of
+  an AWS design, brief or exam-style scenario. The skill holds the checks that catch impossible combinations, fabricated
   features, wrong-direction wiring, stale limits and detective-vs-preventive mix-ups. For designing a whole system,
-  migration, DR plan or landing zone use `cloud-architect` instead; use this one for picking between options.
+  migration, DR plan or landing zone use `cloud-architect` instead.
 ---
 
 # AWS decision framework
