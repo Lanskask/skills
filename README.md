@@ -13,6 +13,7 @@ mechanical work into scripts so the model spends few tokens.
 | [`openapi-optimizer`](skills/openapi-optimizer)           | Splits and compresses large OpenAPI/Swagger specs so agents read 60-95% fewer tokens                     |
 | [`github-cli`](skills/github-cli)                         | Pushing branches, stacked PRs and issues with `gh`, and fixes for its common errors                      |
 | [`aws-decision-framework`](skills/aws-decision-framework) | Picks between AWS services and checks design proposals: priority first, then eliminate, then rank        |
+| [`bitwarden-cli`](skills/bitwarden-cli)                   | Gets secrets from Bitwarden with `bw` without printing them: unlock check, safe search, inline use       |
 
 ## Install
 
