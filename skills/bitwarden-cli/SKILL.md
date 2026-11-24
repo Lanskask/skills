@@ -55,7 +55,7 @@ bw get username <id> --nointeraction
 ```
 
 - Never run `bw get item` or `bw list items` without a `jq` filter, and never show the unfiltered output.
-- Every example below assumes the `kpass export BW_SESSION` prefix in the same Bash call.
+- Every `bw` command in this file assumes the `kpass export BW_SESSION` prefix in the same Bash call.
 - Custom fields: `bw get item <id> | jq -r '.fields[] | select(.name=="X") | .value'` goes inside `$(...)` too.
 - If a command echoes the secret back (verbose flags, error messages), do not quote that part in your reply.
 
