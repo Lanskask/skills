@@ -11,21 +11,21 @@ The goal is to use a secret without it ever appearing in the conversation.
 
 ## Before any `bw` call
 
-1. Each Bash call starts a fresh shell, so load the session key from the macOS Keychain (see the `kpass` skill) at the
-   start of every call that uses `bw`, in the same command:
+1. `BW_SESSION` is the session key `bw` reads from the environment. Bash calls inherit the environment of the shell that
+   launched Claude Code, so it must be set there. Check with:
 
    ```bash
-   source ~/.bash_functions && kpass export BW_SESSION >/dev/null && bw status --nointeraction | jq -r .status
+   bw status --nointeraction | jq -r .status
    ```
 
-   `BW_SESSION` is the session key `bw` reads from the environment. The status must be `unlocked`.
+   The status must be `unlocked`. Without `BW_SESSION`, `bw` reports `locked`.
 
-2. If the status is `locked` or `unauthenticated`, or `kpass` says `BW_SESSION` is not found, stop and tell the user to
-   run this in their own terminal (it needs the master password):
+2. If the status is `locked` or `unauthenticated`, stop and tell the user to run this in their own terminal (it needs
+   the master password) and restart `claude` from that shell:
 
    ```bash
-   bw login                                             # once, if unauthenticated
-   security add-generic-password -a "$USER" -s BW_SESSION -w "$(bw unlock --raw)" -U
+   bw login                               # once, if unauthenticated
+   export BW_SESSION="$(bw unlock --raw)"
    ```
 
    Never ask for the master password, never run `bw unlock` or `bw login` yourself, never write `BW_SESSION` to a file.
@@ -55,7 +55,6 @@ bw get username <id> --nointeraction
 ```
 
 - Never run `bw get item` or `bw list items` without a `jq` filter, and never show the unfiltered output.
-- Every `bw` command in this file assumes the `kpass export BW_SESSION` prefix in the same Bash call.
 - Custom fields: `bw get item <id> | jq -r '.fields[] | select(.name=="X") | .value'` goes inside `$(...)` too.
 - If a command echoes the secret back (verbose flags, error messages), do not quote that part in your reply.
 
