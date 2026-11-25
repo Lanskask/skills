@@ -5,6 +5,7 @@ info:
   description: >
     Update or clear a duckdns.org subdomain's IPv4/IPv6 address or TXT record. Source:
     https://www.duckdns.org/spec.jsp. Replies are plain text, HTTP 200 even on failure ("KO"). Always use HTTPS.
+security: [] # token is a plain query/path parameter, not an OpenAPI security scheme
 servers:
   - url: https://www.duckdns.org
 paths:
