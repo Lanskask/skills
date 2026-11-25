@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  title: DuckDNS HTTP API
+  version: "1.0"
+  description: >
+    Update or clear a duckdns.org subdomain's IPv4/IPv6 address or TXT record. Source:
+    https://www.duckdns.org/spec.jsp. Replies are plain text, HTTP 200 even on failure ("KO"). Always use HTTPS.
+servers:
+  - url: https://www.duckdns.org
+paths:
+  /update:
+    get:
+      operationId: update
+      summary: Update or clear the IP (ip, ipv6) or TXT (txt) record of one or more subdomains
+      description: >
+        Send `txt` to set a TXT record (applies to all sub-subdomains, not shown in the web UI). Without `txt`, the IP
+        records are updated. `clear=true` ignores ip/ipv6/txt and clears the records. Verbose replies may echo the
+        `txt` value even when `clear=true`; the record is still cleared.
+      parameters:
+        - name: domains
+          in: query
+          required: true
+          description: Subnames only (no ".duckdns.org"), comma-separated.
+          schema: { type: string, example: "site-publisher-test" }
+        - name: token
+          in: query
+          required: true
+          description: Account token. Secret.
+          schema: { type: string }
+        - name: ip
+          in: query
+          description: IPv4 or IPv6 address. If blank, the caller's IPv4 is auto-detected (IPv4 only).
+          schema: { type: string }
+        - name: ipv6
+          in: query
+          description: IPv6 address. Updates both records when sent with ip; disables ip auto-detection.
+          schema: { type: string }
+        - name: txt
+          in: query
+          description: TXT record value.
+          schema: { type: string }
+        - name: verbose
+          in: query
+          description: If true, OK replies add the current IPv4, IPv6 (or TXT) and UPDATED or NOCHANGE.
+          schema: { type: boolean }
+        - name: clear
+          in: query
+          description: If true, clears both IP records (or the TXT record when txt is sent).
+          schema: { type: boolean }
+      responses:
+        "200":
+          $ref: "#/components/responses/Result"
+  /update/{domain}/{token}/{ip}:
+    get:
+      operationId: updateByPath
+      summary: Parameter-free form for basic routers (one subdomain only)
+      parameters:
+        - { name: domain, in: path, required: true, schema: { type: string } }
+        - { name: token, in: path, required: true, schema: { type: string } }
+        - name: ip
+          in: path
+          required: true
+          description: IPv4 or IPv6. To auto-detect, omit the segment and call `/update/{domain}/{token}`.
+          schema: { type: string }
+      servers:
+        - url: https://duckdns.org
+      responses:
+        "200":
+          $ref: "#/components/responses/Result"
+components:
+  responses:
+    Result:
+      description: "`OK` or `KO`; with verbose=true, `OK` is followed by lines (IPv4, IPv6 or TXT, then UPDATED or NOCHANGE)."
+      content:
+        text/plain:
+          schema: { type: string }
+          examples:
+            ok: { value: "OK" }
+            ko: { value: "KO" }
+            verbose: { value: "OK\n127.0.0.2\n\nUPDATED" }

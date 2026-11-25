@@ -38,6 +38,7 @@ curl -s "https://www.duckdns.org/update?domains=SUB&token=$DUCKDNS_TOKEN&txt=VAL
 
 - `txt` is required; `clear=true` ignores it and clears the TXT record.
 - The record also answers for every sub-subdomain: `a.SUB.duckdns.org` returns the TXT of `SUB.duckdns.org`.
+- With `verbose=true`, the reply to `clear=true&txt=x` still echoes `x`; the record is cleared (checked with `dig`).
 - It does not show in the web UI. Check with `dig SUB.duckdns.org TXT`.
 
 ## Reading the reply
@@ -58,3 +59,5 @@ device forces it.
 ## Limits
 
 The spec states no rate limits. Do not call the endpoint in a loop; update only when the address actually changes.
+
+Machine-readable spec: `openapi.yaml` in this folder.
